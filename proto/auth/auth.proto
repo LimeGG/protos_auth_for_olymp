@@ -1,0 +1,34 @@
+//proto/auth/auth.proto
+
+// Версия ProtoBuf
+syntax = "proto3";
+
+// Текущий пакет - указывает пространство имен для сервиса и сообщний. Помогает избегать конфликт имен.
+package auth;
+
+// Настройка для генерации Go кода.
+option go_package = "olymp.auth.v1;authv1";
+
+service Auth {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  int64 user_id = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+  int32 app_od = 3;
+}
+
+message LoginResponse {
+  string token = 1;
+}
